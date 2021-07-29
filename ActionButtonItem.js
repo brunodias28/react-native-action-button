@@ -77,7 +77,7 @@ export default class ActionButtonItem extends Component {
 
     const buttonStyle = {
       justifyContent: "center",
-      alignItems: "center",
+      alignItems: "center",      
       width: size,
       height: size,
       borderRadius: size / 2,
@@ -98,8 +98,8 @@ export default class ActionButtonItem extends Component {
           borderRadius: this.props.size / 2
         }
       : {
-          paddingHorizontal: this.props.offsetX,
-          height: size + SHADOW_SPACE + spacing
+          paddingHorizontal: this.props.isLandscape ? 5 : this.props.offsetX,
+          height: this.props.isLandscape ? size + spacing : size + SHADOW_SPACE + spacing
         };
     return (
       <Animated.View

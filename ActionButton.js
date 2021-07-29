@@ -123,7 +123,8 @@ export default class ActionButton extends Component {
           style={[
             this.getOverlayStyles(),
             this.getOrientation(),
-            this.getOffsetXY()
+            this.getOffsetXY(),
+            this.props.isLandscape && {flexDirection:'row', margin: 0}
           ]}
         >
           {this.state.active &&
@@ -257,7 +258,7 @@ export default class ActionButton extends Component {
   }
 
   _renderActions() {
-    const { children, verticalOrientation } = this.props;
+    const { children, verticalOrientation, isLandscape } = this.props;
 
     if (!this.state.active) return null;
 
@@ -267,13 +268,14 @@ export default class ActionButton extends Component {
 
     const actionStyle = {
       flex: 1,
-      alignSelf: "stretch",
+      alignSelf: isLandscape ? "flex-end" :"stretch",
       // backgroundColor: 'purple',
       justifyContent: verticalOrientation === "up" ? "flex-end" : "flex-start",
-      paddingTop: this.props.verticalOrientation === "down"
+      paddingTop: isLandscape ? 0 : this.props.verticalOrientation === "down"
         ? this.props.spacing
         : 0,
-      zIndex: this.props.zIndex
+      zIndex: this.props.zIndex,
+      flexDirection: isLandscape ? 'row' : 'column'
     };
 
     return (
